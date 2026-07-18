@@ -1,3 +1,10 @@
+name: Task 1 CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   install:
     uses: ./.github/workflows/install.yml

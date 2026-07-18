@@ -1,16 +1,12 @@
-# Task 1 - Dockerized Flask Application with CI/CD
+# Task 1 - Dockerize a Simple Flask Application with CI/CD
 
-## Overview
+## Objective
 
-This task demonstrates a simple Flask web application that has been containerized using Docker and integrated with GitHub Actions for Continuous Integration (CI).
-
-The CI pipeline automatically installs dependencies, runs unit tests, builds the Docker image, and (optionally) pushes the image to Docker Hub whenever code is pushed to the `main` branch.
-
----
+Create a simple Flask application, Dockerize it, write unit tests, and configure a GitHub Actions pipeline to automatically build and test the application.
 
 ## Project Structure
 
-```text
+```
 task-1/
 ├── app.py
 ├── requirements.txt
@@ -20,62 +16,64 @@ task-1/
 └── README.md
 ```
 
----
+## Technologies Used
 
-## Prerequisites
-
-- Python 3.12+
+- Python 3
+- Flask
+- Pytest
 - Docker
-- Git
-- GitHub Account
+- GitHub Actions
 
----
+## Application
 
-## Running the Application Locally
+The application exposes a single endpoint:
 
-Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Start the application:
-
-```bash
-python app.py
-```
-
-Open your browser and navigate to:
-
-```
-http://localhost:5000
-```
-
-Expected output:
+- **GET /** → Returns:
 
 ```
 Hello, DevOps!
 ```
 
----
+## Running Locally
 
-## Running the Tests
+Create a virtual environment:
 
-Execute the unit tests using pytest:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+python app.py
+```
+
+Visit:
+
+```
+http://localhost:5000
+```
+
+## Running Tests
 
 ```bash
 pytest
 ```
 
-Expected result:
+Expected output:
 
 ```
 1 passed
 ```
 
----
-
-## Building the Docker Image
+## Docker
 
 Build the Docker image:
 
@@ -86,69 +84,25 @@ docker build -t flask-devops-app .
 Run the container:
 
 ```bash
-docker run -d --name flask-app -p 5000:5000 flask-devops-app
+docker run -d -p 5000:5000 flask-devops-app
 ```
 
-Verify the application:
+Access:
 
 ```
 http://localhost:5000
 ```
 
-or
+## CI/CD Pipeline
 
-```bash
-curl http://localhost:5000
-```
+GitHub Actions automatically performs the following on every push to the **main** branch:
 
----
-
-## GitHub Actions CI Pipeline
-
-The GitHub Actions workflow performs the following steps:
-
-1. Checkout the repository
-2. Set up Python
-3. Install project dependencies
-4. Execute unit tests using pytest
-5. Build the Docker image
-6. Push the Docker image to Docker Hub (Bonus)
-
-The workflow is triggered on every push to the `main` branch.
-
----
-
-## Docker Hub (Bonus)
-
-The Docker image is pushed to Docker Hub using GitHub Secrets.
-
-Required secrets:
-
-- `DOCKERHUB_USERNAME`
-- `DOCKERHUB_TOKEN`
-
----
-
-## Files
-
-| File | Description |
-|------|-------------|
-| app.py | Flask application |
-| requirements.txt | Python dependencies |
-| test_app.py | Unit tests |
-| Dockerfile | Docker image configuration |
-| .dockerignore | Excludes unnecessary files from Docker build |
-| ci.yml | GitHub Actions CI/CD workflow |
-
----
+1. Checkout source code
+2. Install Python dependencies
+3. Execute unit tests
+4. Build Docker image
+5. Push Docker image to Docker Hub (optional)
 
 ## Outcome
 
-Successfully implemented:
-
-- Flask application
-- Docker containerization
-- Automated unit testing
-- GitHub Actions CI pipeline
-- Docker image build
-- Docker Hub image publishing (Bonus)
+The Flask application was successfully containerized, tested using Pytest, and automated with a GitHub Actions CI pipeline.
